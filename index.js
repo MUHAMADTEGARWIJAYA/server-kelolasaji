@@ -16,7 +16,7 @@ import orderCashierRouter from './router/orders cashier/order-cashier-router.js'
 
 
 const app = express()
-const port = 8080
+const port = process.env.PORT || 4000;
 dotenv.config()
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
