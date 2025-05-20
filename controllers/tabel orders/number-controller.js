@@ -115,7 +115,7 @@ export const generateTableQR = async (req, res) => {
       return res.status(404).json({ message: "Meja tidak ditemukan untuk UMKM ini" });
     }
 
-    const url = `http://localhost:3000/${tableId}/${umkm_id}/menu`;
+    const url = `https://client-kelolasaji.vercel.app/${tableId}/${umkm_id}/menu`;
     const qrCodeImage = await QRCode.toDataURL(url);
 
     res.status(200).json({
