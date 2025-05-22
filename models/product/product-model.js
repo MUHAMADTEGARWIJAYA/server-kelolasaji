@@ -15,6 +15,7 @@ const productSchema = new mongoose.Schema({
 
   // Tambahan: Soft delete flag
   isDeleted: { type: Boolean, default: false },
+  isActive: { type: Boolean, default: true },
 });
 
 export default mongoose.model("Product", productSchema);

@@ -136,3 +136,34 @@ export const getProductById = async (req, res) => {
         });
     }
 };
+
+export const setProductActiveStatus = async (req, res) => {
+    try {
+        const { id } = req.params; // ID produk
+        const { isActive } = req.body; // Status baru
+        const umkmId = req.user.umkm_id; // Ambil umkm_id dari user login
+
+        // Validasi input
+        if (typeof isActive !== "boolean") {
+            return res.status(400).json({ message: "Status isActive harus berupa boolean (true/false)." });
+        }
+
+        // Temukan produk dan update isActive
+        const product = await Product.findOneAndUpdate(
+            { _id: id, umkm_id: umkmId },
+            { isActive },
+            { new: true } // Return data terbaru setelah update
+        );
+
+        if (!product) {
+            return res.status(404).json({ message: "Produk tidak ditemukan atau bukan milik Anda." });
+        }
+
+        res.status(200).json({
+            message: `Status produk berhasil diubah menjadi ${isActive ? "aktif" : "tidak aktif"}.`,
+            product
+        });
+    } catch (error) {
+        res.status(500).json({ message: "Terjadi kesalahan server.", error: error.message });
+    }
+};
