@@ -5,7 +5,7 @@ const generateAccessToken = (user, umkm_id) =>{
         id: user._id,
         role: user.role,
         umkm_id: umkm_id
-    }, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1m"});
+    }, process.env.ACCESS_TOKEN_SECRET, {expiresIn: "1d"});
 }
 
 const generateRefreshToken = (user) => {

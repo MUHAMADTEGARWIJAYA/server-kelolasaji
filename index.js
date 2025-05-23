@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://client-kelolasaji.vercel.app", "https://catatansaya.vercel.app"],
+    origin: ["http://localhost:3000", "https://client-kelolasaji.vercel.app",],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true,
   })
