@@ -45,12 +45,12 @@ export const login = async (req, res) => {
         const user = await Users.findOne({ email });
         
         if (!user) {
-            return res.status(401).json({ message: "User not found" });
+            return res.status(400).json({ message: "User not found" });
         }
         
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid password" });
+            return res.status(408).json({ message: "Invalid password" });
         }
 
         const umkm = await Umkm.findById(user.umkm_id);
@@ -84,7 +84,7 @@ export const login = async (req, res) => {
             message: "Login successful",
             accessToken,
             refreshToken,
-            user: { email: user.email, role: user.role, umkm_id: umkm._id }
+            user: { email: user.email, role: user.role, umkm_id: umkm._id, isActive: umkm.isActive }
         });
     } catch (error) {
         res.status(500).json({ message: "Internal server error", error: error.message });
@@ -99,7 +99,7 @@ export const refreshToken = async (req, res) => {
         const user = await Users.findOne({ refreshToken });
         if (!user) return res.status(403).json({ message: "Refresh token tidak valid" });
 
-        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err,) => {
             if (err) {
                 user.refreshToken = "";
                 await user.save();

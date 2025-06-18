@@ -17,7 +17,7 @@ export const checkSubscription = async (req, res, next) => {
   
       next(); // lanjut ke route berikutnya
     } catch (err) {
-      res.status(500).json({ message: "Terjadi kesalahan pada pengecekan langganan" });
+      res.status(500).json({ message: "Terjadi kesalahan pada pengecekan langganan", error: err.message });
     }
   };
   

@@ -1,5 +1,4 @@
 import Product from "../../models/product/product-model.js";
-import Umkm from "../../models/auth/model-umkm.js";
 import { uploadToCloudinary } from "../../utils/cloudinary-file.js";
 export const createProduct = async (req, res) => {
     try {

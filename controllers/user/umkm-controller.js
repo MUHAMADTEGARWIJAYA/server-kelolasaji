@@ -72,7 +72,7 @@ export const renewSubscription = async (req, res) => {
 
 export const checkSubscription = async (req, res, next) => {
     try {
-      const umkmId = req.user.umkm_id; // misalnya diambil dari JWT
+      const umkmId = req.user.umkm_id; 
   
       const umkm = await Umkm.findById(umkmId);
   
@@ -87,7 +87,7 @@ export const checkSubscription = async (req, res, next) => {
   
       next(); // lanjut ke route berikutnya
     } catch (err) {
-      res.status(500).json({ message: "Terjadi kesalahan pada pengecekan langganan" });
+      res.status(500).json({ message: "Terjadi kesalahan pada pengecekan langganan", error: err.message });
     }
   };
 
@@ -105,7 +105,7 @@ export const checkSubscription = async (req, res, next) => {
         return res.status(404).json({ message: "UMKM tidak ditemukan" });
       }
   
-      umkm.isActive = true;
+      umkm.isActive = false;
       await umkm.save();
   
       res.status(200).json({ message: "Langganan berhasil dinonaktifkan", umkm });

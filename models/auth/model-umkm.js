@@ -7,7 +7,7 @@ const umkmSchema = new mongoose.Schema({
     logo: { type: String, required: true },
     subscribeStart: { type: Date, default: Date.now },
     subscribeEnd: { type: Date, default: Date.now },
-    isActive: { type: Boolean, default: true },
+    isActive: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now },
     theme: {
     primaryColor: { type: String, default: "#000000" },
